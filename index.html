@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Journey - Animated Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: #0a0e27;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animated gradient background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0a0e27, #1a1e3a, #2a1e4a, #1a1e3a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated stars */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Generate multiple stars with different sizes and positions */
+        .star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s; }
+        .star:nth-child(2) { width: 3px; height: 3px; top: 20%; left: 40%; animation-delay: 0.5s; }
+        .star:nth-child(3) { width: 2px; height: 2px; top: 30%; left: 60%; animation-delay: 1s; }
+        .star:nth-child(4) { width: 4px; height: 4px; top: 40%; left: 80%; animation-delay: 1.5s; }
+        .star:nth-child(5) { width: 2px; height: 2px; top: 50%; left: 10%; animation-delay: 2s; }
+        .star:nth-child(6) { width: 3px; height: 3px; top: 60%; left: 30%; animation-delay: 2.5s; }
+        .star:nth-child(7) { width: 2px; height: 2px; top: 70%; left: 50%; animation-delay: 0.3s; }
+        .star:nth-child(8) { width: 3px; height: 3px; top: 80%; left: 70%; animation-delay: 0.8s; }
+        .star:nth-child(9) { width: 2px; height: 2px; top: 90%; left: 90%; animation-delay: 1.3s; }
+        .star:nth-child(10) { width: 4px; height: 4px; top: 15%; left: 75%; animation-delay: 1.8s; }
+
+        /* Floating orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            top: -150px;
+            left: -150px;
+            animation: float1 20s infinite alternate ease-in-out;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #3a86ff, #06ffa5);
+            bottom: -200px;
+            right: -200px;
+            animation: float2 25s infinite alternate ease-in-out;
+        }
+
+        .orb3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #ffbe0b, #fb5607);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float3 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes float1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 100px) scale(1.2); }
+        }
+
+        @keyframes float2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-100px, -100px) scale(1.1); }
+        }
+
+        @keyframes float3 {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-30%, -70%) scale(0.9); }
+        }
+
+        /* Content container */
+        .content {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        /* Animated title */
+        .title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #ff006e);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 3s linear infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientText {
+            to { background-position: 200% center; }
+        }
+
+        /* Animated subtitle */
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #0a0e27;
+            background: linear-gradient(90deg, #06ffa5, #3a86ff);
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(6, 255, 165, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(6, 255, 165, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(6, 255, 165, 0); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(6, 255, 165, 0.5);
+        }
+
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Floating geometric shapes */
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid #ff006e;
+            animation: rotate 20s linear infinite;
+        }
+
+        .square {
+            width: 80px;
+            height: 80px;
+            background: #3a86ff;
+            animation: rotate 25s linear infinite reverse;
+        }
+
+        .hexagon {
+            width: 100px;
+            height: 55px;
+            background: #06ffa5;
+            position: relative;
+            animation: rotate 30s linear infinite;
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+        }
+
+        .hexagon:before {
+            bottom: 100%;
+            border-bottom: 28px solid #06ffa5;
+        }
+
+        .hexagon:after {
+            top: 100%;
+            border-top: 28px solid #06ffa5;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Position shapes */
+        .triangle { top: 10%; left: 10%; }
+        .square { bottom: 15%; right: 15%; }
+        .hexagon { top: 20%; right: 20%; }
+
+        /* Glowing ring animation */
+        .ring {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: expand 4s infinite;
+        }
+
+        @keyframes expand {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        @keyframes particleAnimation {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        /* Create multiple particles */
+        .particle:nth-child(1) { --tx: 100px; --ty: -100px; animation: particleAnimation 5s infinite; animation-delay: 0s; }
+        .particle:nth-child(2) { --tx: -100px; --ty: -100px; animation: particleAnimation 5s infinite; animation-delay: 0.5s; }
+        .particle:nth-child(3) { --tx: 100px; --ty: 100px; animation: particleAnimation 5s infinite; animation-delay: 1s; }
+        .particle:nth-child(4) { --tx: -100px; --ty: 100px; animation: particleAnimation 5s infinite; animation-delay: 1.5s; }
+        .particle:nth-child(5) { --tx: 150px; --ty: 0; animation: particleAnimation 5s infinite; animation-delay: 2s; }
+        .particle:nth-child(6) { --tx: -150px; --ty: 0; animation: particleAnimation 5s infinite; animation-delay: 2.5s; }
+        .particle:nth-child(7) { --tx: 0; --ty: -150px; animation: particleAnimation 5s infinite; animation-delay: 3s; }
+        .particle:nth-child(8) { --tx: 0; --ty: 150px; animation: particleAnimation 5s infinite; animation-delay: 3.5s; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .orb1, .orb2, .orb3 {
+                filter: blur(60px);
+            }
+            
+            .shape {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <!-- Animated background -->
+        <div class="animated-bg"></div>
+        
+        <!-- Stars -->
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+        </div>
+        
+        <!-- Floating orbs -->
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        
+        <!-- Geometric shapes -->
+        <div class="shape triangle"></div>
+        <div class="shape square"></div>
+        <div class="shape hexagon"></div>
+        
+        <!-- Glowing ring -->
+        <div class="ring"></div>
+        
+        <!-- Main content -->
+        <div class="content">
+            <h1 class="title">Cosmic Journey</h1>
+            <p class="subtitle">Explore the infinite possibilities of the digital universe with cutting-edge technology and breathtaking animations</p>
+            <a href="#" class="cta-button">Begin Exploration</a>
+        </div>
+        
+        <!-- Particles -->
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+        <div class="particle" style="top: 50%; left: 50%;"></div>
+    </section>
+</body>
+</html>
